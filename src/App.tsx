@@ -1,5 +1,5 @@
 import { useState, useCallback, ButtonHTMLAttributes } from "react";
-import { blockingCall, randomIntFromInterval, workerInstance } from "./utils";
+import { blockingCall, fancyTimeFormat, randomIntFromInterval, workerInstance } from "./utils";
 import { useSnapshot } from "valtio";
 import { appState } from "./store";
 import { useInterval } from "./hooks/useInterval";
@@ -14,7 +14,7 @@ function StateDisplay() {
     const { counterStr, counterInt } = useSnapshot(appState);
     useInterval(() => {
         appState.counterInt++;
-    }, 1000);
+    }, 4*1000);
     return (
         <div className="text-2xl">
             <div className="flex space-x-2">
@@ -26,7 +26,7 @@ function StateDisplay() {
             <div className="flex space-x-2">
                 <div className="">Int</div>
                 <div className="">
-                    {counterInt}
+                    {fancyTimeFormat(counterInt)}
                 </div>
             </div>
         </div>
