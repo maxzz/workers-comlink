@@ -1,4 +1,4 @@
-export * from './utils-shared';
+export * from './shared-blocking-call';
 
 // some UI thread functions
 export const randomIntFromInterval = (min: number, max: number): number => {
