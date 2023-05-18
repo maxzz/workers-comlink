@@ -4,7 +4,7 @@ import { appState } from "../store";
 export const blockingCall = () => {
     console.log('blockingCall start');
 
-    appState.counter = '0';
+    appState.counterStr = '0';
 
     // const a = new Array(100_000_000)
     const a = new Array(100_000);
@@ -16,12 +16,12 @@ export const blockingCall = () => {
             if (idx % 10000 === 0) {
                 console.log('idx [%d] acc [%d]', idx, acc);
                 
-                appState.counter = acc.toString();
+                appState.counterStr = acc.toString();
                 //console.log('acc', acc);
             }
             return BigInt(acc) + BigInt(cur);
         }, BigInt(0));
 
     console.log('blockingCall done', b);
-    console.log('blockingCall shapshot', snapshot(appState).counter);
+    console.log('blockingCall shapshot', snapshot(appState).counterStr);
 };

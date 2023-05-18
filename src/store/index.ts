@@ -1,5 +1,6 @@
 import { proxy } from "valtio";
 
 export const appState = proxy({
-    counter: '0',
+    counterStr: '0', // to fit BigInt
+    counterInt: 0,
 });

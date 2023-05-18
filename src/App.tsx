@@ -2,6 +2,7 @@ import { useState, useCallback, ButtonHTMLAttributes } from "react";
 import { blockingCall, randomIntFromInterval, workerInstance } from "./utils";
 import { useSnapshot } from "valtio";
 import { appState } from "./store";
+import { useInterval } from "./hooks/useInterval";
 
 function Button({ ...rest }: ButtonHTMLAttributes<HTMLElement>) {
     return (
@@ -10,10 +11,24 @@ function Button({ ...rest }: ButtonHTMLAttributes<HTMLElement>) {
 }
 
 function StateDisplay() {
-    const { counter } = useSnapshot(appState);
+    const { counterStr, counterInt } = useSnapshot(appState);
+    useInterval(() => {
+        appState.counterInt++;
+    }, 1000);
     return (
         <div className="text-2xl">
-            {counter}
+            <div className="flex space-x-2">
+                <div className="">Str</div>
+                <div className="">
+                    {counterStr}
+                </div>
+            </div>
+            <div className="flex space-x-2">
+                <div className="">Int</div>
+                <div className="">
+                    {counterInt}
+                </div>
+            </div>
         </div>
     );
 }
@@ -45,8 +60,8 @@ export function App() {
             <StateDisplay />
 
             <section className="flex items-center space-x-4">
-                <Button onClick={workerCall}>Worker Call</Button>
-                <Button onClick={normalFuncCall}>Main Thread Call</Button>
+                <Button onClick={workerCall}>Worker Thread Call</Button>
+                <Button onClick={normalFuncCall}>UI Thread Call</Button>
                 <Button onClick={randomIntHandler}>Random Int {random}</Button>
             </section>
 
