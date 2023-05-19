@@ -12,22 +12,16 @@ function Button({ ...rest }: ButtonHTMLAttributes<HTMLElement>) {
 
 function StateDisplay() {
     const { counterStr, counterInt } = useSnapshot(appState);
-    useInterval(() => {
-        appState.counterInt++;
-    }, 1000);
+    useInterval(() => appState.counterInt++, 1000);
     return (
-        <div className="text-2xl">
-            <div className="flex space-x-2">
-                <div className="">Str</div>
-                <div className="">
-                    {counterStr}
-                </div>
+        <div className="text-2xl grid grid-cols-[auto,minmax(10ch,1fr)] gap-x-4 gap-y-4 items-center">
+            <div className="w-min text-sm">Work counter</div>
+            <div className="">
+                {counterStr}
             </div>
-            <div className="flex space-x-2">
-                <div className="">Int</div>
-                <div className="">
-                    {fancyTimeFormat(counterInt)}
-                </div>
+            <div className="">Time</div>
+            <div className="">
+                {fancyTimeFormat(counterInt)}
             </div>
         </div>
     );

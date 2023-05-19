@@ -11,24 +11,22 @@ export const workerInstance = new ComlinkWorker<typeof import("../worker")>(
 );
 
 export function fancyTimeFormat(duration: number) {
+    // 0. Output like '1:01' or '4:03:59' or '123:03:59'
+
     const hrs = ~~(duration / 3600);
     const min = ~~((duration % 3600) / 60);
     const sec = ~~duration % 60;
 
-    // Output like '1:01' or '4:03:59' or '123:03:59'
-    let ret = '';
+    const h = hrs > 0 ? `${hrs.toString().padStart(2, '0')}:` : '';
+    const m = min < 10 ? min : min.toString().padStart(2, '0');
+    const s = sec.toString().padStart(2, '0');
+    return `${h}${m}:${s}`
 
-    ret = `${hrs > 0 ? `${hrs.toString().padStart(2, '0')}:` : ''}${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`
-
+    // let ret = '';
     // if (hrs > -10) {
     //     ret += `${hrs}:${mins < 10 ? '0' : ''}`;
     // }
-    // //console.log('ret1', ret);
-
     // ret += `${mins}:${secs < 10 ? '0' : ''}`;
-    // //console.log('ret2', ret);
     // ret += `${secs}`;
-    // //console.log('ret3\n\n', ret);
-
-    return ret;
+    // return ret;
 }
