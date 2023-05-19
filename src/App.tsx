@@ -14,7 +14,7 @@ function StateDisplay() {
     const { counterStr, counterInt } = useSnapshot(appState);
     useInterval(() => {
         appState.counterInt++;
-    }, 4*1000);
+    }, 1000);
     return (
         <div className="text-2xl">
             <div className="flex space-x-2">
