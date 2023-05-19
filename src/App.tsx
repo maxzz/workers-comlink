@@ -3,6 +3,7 @@ import { blockingCall, fancyTimeFormat, randomIntFromInterval, workerInstance } 
 import { useSnapshot } from "valtio";
 import { appState } from "./store";
 import { useInterval } from "./hooks/useInterval";
+import { appStateWorker } from "./worker";
 
 function Button({ ...rest }: ButtonHTMLAttributes<HTMLElement>) {
     return (
@@ -13,16 +14,26 @@ function Button({ ...rest }: ButtonHTMLAttributes<HTMLElement>) {
 function StateDisplay() {
     const { counterStr, counterInt } = useSnapshot(appState);
     useInterval(() => appState.counterInt++, 1000);
+
+    const { counterStr: counterStrWorker } = useSnapshot(appStateWorker);
     return (
         <div className="text-2xl grid grid-cols-[auto,minmax(10ch,1fr)] gap-x-4 gap-y-4 items-center">
-            <div className="w-min text-sm">Work counter</div>
+
+            <div className="w-min text-sm">UI thread counter</div>
             <div className="">
                 {counterStr}
             </div>
+
+            <div className="w-min text-sm">Worker thread counter</div>
+            <div className="">
+                {counterStrWorker}
+            </div>
+
             <div className="">Time</div>
             <div className="">
                 {fancyTimeFormat(counterInt)}
             </div>
+            
         </div>
     );
 }
