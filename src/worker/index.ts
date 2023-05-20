@@ -14,8 +14,12 @@ export const someRPCFunc = () => {
 
 //export { appState as appStateWorker } from "../store";
 
-import { appState as appStateWorkerProxy } from "../store";
-import { snapshot } from "valtio";
+import { proxy, snapshot } from "valtio";
 
-export const appStateWorker = snapshot(appStateWorkerProxy);
+export const appStateWorkerProxy = proxy({
+    counterStr: '0', // to fit BigInt
+    counterInt: 0,
+});
+
+export const appStateWorker = appStateWorkerProxy;
 //export const appStateWorker = appStateWorkerProxy;
