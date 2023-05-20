@@ -16,6 +16,7 @@ function StateDisplay() {
     useInterval(() => appState.counterInt++, 1000);
 
     const { counterStr: counterStrWorker } = useSnapshot(appStateWorker);
+    //const { counterStr: counterStrWorker } = workerInstance.appStateWorker;
     return (
         <div className="text-2xl grid grid-cols-[auto,minmax(10ch,1fr)] gap-x-4 gap-y-4 items-center">
 
